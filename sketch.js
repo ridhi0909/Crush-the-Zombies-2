@@ -30,11 +30,11 @@ function setup() {
   frameRate(80);
 
   ground = new Ground(width/2,height-10,width,20,"brown");
-  leftWall = new Ground(300,height/2+50,100,300,"green");
-  rightWall = new Ground(width-300,height/2+50,100,300,"green");
-  bridge = new Bridge(15,{x:width/2 - 400, y:height/2})
+  leftWall = new Ground(200,height/2+50,100,300,"green");
+  rightWall = new Ground(width-200,height/2+50,100,300,"green");
+  bridge = new Bridge(18,{x:width/2 - 600, y:height/2})
 
-  joinPoint = new Ground(width-400,height/2+10,40,20,"yellow");
+  joinPoint = new Ground(width-250,height/2+10,40,20,"yellow");
   Matter.Composite.add(bridge.body,joinPoint);
 
   joinLink = new Link(bridge,joinPoint);
@@ -53,10 +53,11 @@ function setup() {
   zombie.velocityX = 10;
 
 
-  breakButton = createButton("axe");
-  breakButton.position(width - 200, height/2 - 50);
+  breakButton = createImg("assets/axe.png");
+  breakButton.size(80,80) 
+  breakButton.position(width - 200, height/2 - 100);
   breakButton.class("breakbutton")
-  breakButton.mousePressed(handleButtonPress);
+  breakButton.mouseClicked(handleButtonPress);
 
 
 }
