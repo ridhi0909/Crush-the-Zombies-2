@@ -11,6 +11,8 @@ const Composite = Matter.Composite;
 var stones = []
 var ground,leftWall,rightWall;
 var bridge;
+var sadZombie;
+var distance;
 
 var joinPoint,joinLink;
 
@@ -19,6 +21,7 @@ function preload(){
   zombie2 = loadImage("./assets/zombie2.png");
   zombie3 = loadImage("./assets/zombie3.png");
   zombie4 = loadImage("./assets/zombie4.png");
+  sadZombie = loadImage("./assets/sad_zombie.png");
 
   backgroundImage = loadImage("./assets/background.png");
 }
@@ -49,6 +52,7 @@ function setup() {
   zombie = createSprite(width/2,height - 110);
   zombie.addAnimation("lefttoright",zombie1,zombie2,zombie1);
   zombie.addAnimation("righttoleft",zombie3,zombie4,zombie3);
+  zombie.addImage("sadZombie",sadZombie);
   zombie.scale = 0.1;
   zombie.velocityX = 10;
 
@@ -70,6 +74,11 @@ function draw() {
 
   for(var stone of stones){
     stone.display();
+    distance = dist(zombie.position.x,zombie.position.y,stone.body.position.x,stone.body.position.y);
+    if(distance<50){
+      zombie.velocityX = 0
+      zombie.changeImage("sadZombie");
+    }
   }
 
   if(zombie.position.x>=width-300){
